@@ -21,6 +21,16 @@ def compare(op, v1: int, v2: int) -> bool:
     match op:
         case jvm.CmpOpr.Eq:
             return v1 == v2
+        case jvm.CmpOpr.Ne:
+            return v1 != v2
+        case jvm.CmpOpr.Lt:
+            return v1 < v2
+        case jvm.CmpOpr.Le:
+            return v1 <= v2
+        case jvm.CmpOpr.Gt:
+            return v1 > v2
+        case jvm.CmpOpr.Ge:
+            return v1 >= v2
         case _:
             raise NotImplementedError(f"Unhandled comparation {op!r}")
 
@@ -39,6 +49,16 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
             else:
                 raise NotImplementedError("Error")
             frame.pc += 1
+
+        case jvm.Ifz(condition=op, target=target):
+            value = frame.stack.pop()
+            assert isinstance(value, jvmc.StackInt), f"expected int, but got {value}"
+
+            if compare(op, value.value, 0):
+                frame.pc %= target
+            else:
+                frame.pc += 1
+
 
         case jvm.Binary(type=jvm.Int(), operant=op):
             v2, v1 = frame.stack.pop(), frame.stack.pop()
