@@ -50,11 +50,26 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 raise NotImplementedError("Error")
             frame.pc += 1
 
+        case jvm.Load(type=jvm.Int(), index=i):
+            v = frame.locals[i]
+            frame.stack.push(v)
+            frame.pc += 1
+
         case jvm.Ifz(condition=op, target=target):
             value = frame.stack.pop()
             assert isinstance(value, jvmc.StackInt), f"expected int, but got {value}"
 
             if compare(op, value.value, 0):
+                frame.pc %= target
+            else:
+                frame.pc += 1
+
+        case jvm.If(condition=op, target=target):
+            v1, v2 = frame.stack.pop(), frame.stack.pop()
+            assert isinstance(v1, jvmc.StackInt), f"expected int, but got {value}"
+            assert isinstance(v2, jvmc.StackInt), f"expected int, but got {value}"
+
+            if compare(op, v1.value, v2.value):
                 frame.pc %= target
             else:
                 frame.pc += 1
@@ -73,14 +88,21 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 frame.stack.push(jvmc.StackInt(value))
                 frame.pc += 1
 
-        case jvm.Return(type=t):
-            if t is not None:
-                raise NotImplementedError("Still to be done")
-
+        case jvm.Return(type=jvm.Int()):
+            v1 = frame.stack.pop()
             state.frames.pop()
-
             if state.frames:
-                raise NotImplementedError("Still to be done")
+                frame = state.frames.peek()
+                frame.stack.push(v1)
+                frame.pc += 1
+            else:
+                output = "ok"
+
+        case jvm.Return(type=jvm.Void()):
+            state.frames.pop()
+            if state.frames:
+                frame = state.frames.peek()
+                frame.pc += 1
             else:
                 output = "ok"
 
