@@ -39,7 +39,7 @@ def main():
     log.debug(f"found {res}")
     rest = content[res.end(0) : -1]
 
-    #find the specific method body
+    ########## find the specific method body ###########
     body_start = content.find("{", res.end())
     counter = 0
     body_end = None
@@ -60,13 +60,16 @@ def main():
 
     method_body = content[body_start + 1:body_end]
 
-    ############# regex matches ##################333
-
-    assert_found = re.search(r"(?P<assert>\.equals\(|assert(?!\s*true\b|True\b))", method_body, re.MULTILINE)
+    ############# regex matches ##################
+    assert_found = re.search(r"(?P<assertFalse>assert\s*false\b)|(?P<assert>\.equals\(|assert(?!\s*true\b|True\b))", method_body, re.MULTILINE)
 
     if assert_found:
-        log.debug("Found assertion")
-        print("assertion error;found-assertion")
+        if assert_found.lastgroup == "assertFalse":
+            log.debug("Found assert false")
+            print("assertion error;found-assert-false")
+        elif assert_found.lastgroup == "assert":        
+            log.debug("Found assertion")
+            print("assertion error;found-assertion")
     else:
         log.debug("No assertion")
         print("assertion error;not-found-assertion")
