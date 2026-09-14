@@ -51,12 +51,12 @@ def main():
 
     if assert_found:
         log.debug("Found assertion")
-        print("assertion error;yes")
+        print("assertion error;found-assertion")
     else:
         log.debug("No assertion")
-        print("assertion error;no")
+        print("assertion error;not-found-assertion")
 
-    divide_or_end = re.search(r"(?P<divide>/)|(?P<end>\}\s*\Z)", rest, re.MULTILINE)
+    divide_or_end = re.search(r"(?P<divideZero>/\s*0\b)|(?P<divide>/)|(?P<end>\}\s*\Z)", rest, re.MULTILINE)
 
     if not divide_or_end:
         log.error("Could not find end of method or divide")
@@ -65,32 +65,17 @@ def main():
 
     log.debug(f"found divide {divide_or_end}")
     divide_found = divide_or_end.lastgroup == "divide"
+    divide_zero_found = divide_or_end.lastgroup == "divideZero"
 
-    if divide_found:
+    if divide_zero_found:
+        log.debug("Found divide by zero")
+        print("divide by zero;found-divide-zero")
+    elif divide_found:
         log.debug("Found divide")
-        print("divide by zero;yes")
+        print("divide by zero;found-divide")
     else:
         log.debug("No divide")
-        print("divide by zero;no")
-
-
-    # # divisao por zero
-    # divide_zero_or_end = re.search(r"/\s*0\b|(^\s*})", rest, re.MULTILINE)
-
-    # if not divide_zero_or_end:
-    #     log.error("Could not find end of method or divide")
-    #     log.error(rest)
-    #     sys.exit(1)
-
-    # log.debug(f"found divide {divide_zero_or_end}")
-    # divide_found = divide_zero_or_end.group(0) == "/"
-
-    # if divide_found:
-    #     log.debug("Found divide")
-    #     print("divide by zero;divide-by-zero")
-    # else:
-    #     log.debug("No divide")
-    #     print("divide by zero;not-found")    
+        print("divide by zero;not-found-divide")
 
 
     out_of_bounds_or_end = re.search(r"(?P<bracket>\[\w+\])|\[\d+\]|(?P<end>\}\s*\Z)", rest, re.MULTILINE);
@@ -103,12 +88,12 @@ def main():
     log.debug(f"found out of bounds {out_of_bounds_or_end}")
     out_of_bounds_found = out_of_bounds_or_end.lastgroup == "bracket"
 
-    if out_of_bounds_or_end:
+    if out_of_bounds_found:
         log.error("Found out of bounds")
-        print("out of bounds;yes")
+        print("out of bounds;found-out-of-bounds")
     else:
         log.debug("No out of bounds")
-        print("out of bounds;no")
+        print("out of bounds;not-found-out-of-bounds")
 
 
     null_pointer_or_end = re.search(r"(?P<null>null\s*\;$)|(?P<end>^\s*})", rest, re.MULTILINE);
@@ -123,10 +108,10 @@ def main():
 
     if null_pointer_found:
         log.error("Found null pointer")
-        print("null pointer;yes")
+        print("null pointer;found-null-pointer")
     else:
         log.debug("No null pointer")
-        print("null pointer;no")
+        print("null pointer;not-found-null-pointer")
 
 
     forever_loop_or_end = re.search(r"(?P<while>while)|(?P<end>\}\s*\Z)", rest, re.MULTILINE);
@@ -140,10 +125,10 @@ def main():
 
     if forever_loop_found:
         log.error("Found *")
-        print("*;yes")
+        print("*;found-loop")
     else:
         log.debug("No *")
-        print("*;no")
+        print("*;not-found-loop")
 
     # #while(true)
     # while_true_or_end = re.search(r"while\(\s*true\s*\)|(^\s*})", rest, re.MULTILINE);
