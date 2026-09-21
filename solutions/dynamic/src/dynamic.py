@@ -13,6 +13,13 @@ def binary(op, v1: int, v2: int) -> int | str:
                 return v1 // v2
             except ZeroDivisionError:
                 return "divide by zero"
+        case jvm.BinaryOpr.Mul:
+            return v1*v2
+        case jvm.BinaryOpr.Add:
+            return v1+v2
+        case jvm.BinaryOpr.Sub:
+            return v1-v2
+        
         case a:
             raise NotImplementedError(f"Unhandled binary {op!r}")
 
@@ -65,7 +72,7 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 frame.pc += 1
 
         case jvm.If(condition=op, target=target):
-            v1, v2 = frame.stack.pop(), frame.stack.pop()
+            v2, v1 = frame.stack.pop(), frame.stack.pop()
             assert isinstance(v1, jvmc.StackInt), f"expected int, but got {value}"
             assert isinstance(v2, jvmc.StackInt), f"expected int, but got {value}"
 
