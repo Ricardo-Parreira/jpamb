@@ -128,6 +128,29 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
             # Hack -- if we create an assertion error, we probably also throw it.
             output = "assertion error"
 
+        case jvm.NewArray(offset, type=t, dim=d):
+            #count is popped off the operand stack. it represents the number of elements in the array to be created
+            count = frame.stack.pop()
+            assert isinstance(count, jvmc.StackInt()), f"expected int, but got {count!r}"
+            match t:
+                case jvm.Int():
+                    ref = state.heap.new(jvmc.HeapArray(array_type, [0] * count.value))
+                    frame.stack.push(ref)
+                    frame.pc += offset
+                case jvm.Boolean():
+                    ref = state.heap.new(jvmc.HeapArray(array_type, [0] * count.value))
+                    frame.stack.push(ref)
+                    frame.pc += offset
+                case jvm.Char():
+                    ref = state.heap.new(jvmc.HeapArray(array_type, ['\u0000'] * count.value))
+                    frame.stack.push(ref)
+                    frame.pc += offset
+                case a:
+                    raise NotImplementedError(f"Unhandled array type {t!r}")
+
+                
+            
+
         case a:
             raise NotImplementedError(a.help())
 
