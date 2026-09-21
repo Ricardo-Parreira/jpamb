@@ -86,25 +86,28 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 output = value
             else:
                 frame.stack.push(jvmc.StackInt(value))
-                frame.pc += 1
+                frame.pc += 1            
 
-        case jvm.Return(type=jvm.Int()):
-            v1 = frame.stack.pop()
-            state.frames.pop()
-            if state.frames:
-                frame = state.frames.peek()
-                frame.stack.push(v1)
-                frame.pc += 1
-            else:
-                output = "ok"
-
-        case jvm.Return(type=jvm.Void()):
-            state.frames.pop()
-            if state.frames:
-                frame = state.frames.peek()
-                frame.pc += 1
-            else:
-                output = "ok"
+        case jvm.Return(type=t):
+            match t:
+                case jvm.Int():
+                    v1 = frame.stack.pop()
+                    state.frames.pop()
+                    if state.frames:
+                        frame = state.frames.peek()
+                        frame.stack.push(v1)
+                        frame.pc += 1
+                    else:
+                        output = "ok"
+                case None:
+                    state.frames.pop()
+                    if state.frames:
+                        frame = state.frames.peek()
+                        frame.pc += 1
+                    else:
+                        output = "ok"
+                case a:
+                    raise NotImplementedError(f"Unhandled return type {t!r}")
 
         case jvm.Get(static=True, field=field):
             # Hack - Only handle the assertion case
