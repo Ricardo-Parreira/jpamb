@@ -19,6 +19,11 @@ def binary(op, v1: int, v2: int) -> int | str:
             return v1+v2
         case jvm.BinaryOpr.Sub:
             return v1-v2
+        case jvm.BinaryOpr.Rem:
+            if (v2!=0):
+                return v1 % v2
+            else:
+                raise ValueError("Division by zero")
         
         case a:
             raise NotImplementedError(f"Unhandled binary {op!r}")
@@ -306,6 +311,39 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
 
         case jvm.Goto(target=target):
             frame.pc = frame.pc % target
+
+        case jvm.InvokeStatic(method=methodid):
+            method = bc.getmethod(methodid)
+            callee = jvmc.Frame.from_method(method)
+            for index in reversed(range(len(methodid.extension.params))):
+                callee.locals[index] = frame.stack.pop()
+            state.frames.push(callee)
+
+        # idk if they are supposed to say
+        case jvm.InvokeVirtual(method=methodid):
+            method = bc.getmethod(methodid)
+            callee = jvmc.Frame.from_method(method)
+            for index in reversed(range(len(methodid.extension.params))):
+                callee.locals[index] = frame.stack.pop()
+            state.frames.push(callee)
+
+        case jvm.InvokeSpecial(method=methodid):
+            method = bc.getmethod(methodid)
+            callee = jvmc.Frame.from_method(method)
+            for index in reversed(range(len(methodid.extension.params))):
+                callee.locals[index] = frame.stack.pop()
+            state.frames.push(callee)
+
+        # It is popped from the operand stack, truncated to a short, then sign-extended to an int result.
+        case jvm.Cast(from_= jvm.Int(), to_= jvm.Short()):
+            value = frame.stack.pop()
+            assert isinstance(value, jvmc.StackInt), f"expected jvm.Int but got {value!r}"
+            truncated = value.value & 0xFFFF
+            frame.stack.push(jvmc.StackInt(truncated))
+            frame.pc += 1
+
+
+
 
         case a:
             raise NotImplementedError(a.help())
