@@ -51,11 +51,20 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
     print(f"Stepping {pc}:\n > {opr}", file=sys.stderr)
     match opr:
         case jvm.Push(type=t, value=v):
-            if t is jvm.Int():
-                frame.stack.push(jvmc.StackInt(v))
-            else:
-                raise NotImplementedError("Error")
-            frame.pc += 1
+            match t:
+                case jvm.Int():
+                    frame.stack.push(jvmc.StackInt(v))
+                    frame.pc += 1
+                case jvm.Boolean():
+                    frame.stack.push(jvmc.StackInt(1 if v else 0))
+                    frame.pc += 1
+                case jvm.Reference():
+                    frame.stack.push(jvmc.StackReference(v))
+                    frame.pc += 1
+                case a:
+                    raise NotImplementedError(f"Unhandled push type {t!r}")
+
+            
 
         case jvm.Load(type=jvm.Int(), index=i):
             v = frame.locals[i]
@@ -161,16 +170,20 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                     assert isinstance(value, jvmc.StackInt), f"expected int, but got {value!r}"
                     assert isinstance(index, jvmc.StackInt), f"expected int, but got {index!r}"
 
-                    array = state.heap[ref]
-                    assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
-                    assert isinstance(array.contains, jvm.Int), f"expected int array, but got {array!r}"
-
                     try:
-                        array.values[index.value] = value.value
+                        array = state.heap[ref]
                     except IndexError:
-                        output = "out of bounds"
+                        output = "null pointer"
                     else:
-                        frame.pc += 1
+                        assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
+                        assert isinstance(array.contains, jvm.Int), f"expected int array, but got {array!r}"
+
+                        try:
+                            array.values[index.value] = value.value
+                        except IndexError:
+                            output = "out of bounds"
+                        else:
+                            frame.pc += 1
 
                 case a:
                     raise NotImplementedError(f"Unhandled array type {t!r}")
@@ -208,16 +221,20 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 case jvm.Int():
                     index, ref = frame.stack.pop(), frame.stack.pop()
                     assert isinstance(index, jvmc.StackInt), f"expected int, but got {index!r}"
-                    array = state.heap[ref]
-                    assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
-
                     try:
-                        value = array.values[index.value]
+                        array = state.heap[ref]
                     except IndexError:
-                        output = "out of bounds"
+                        output = "null pointer"
                     else:
-                        frame.stack.push(jvmc.StackInt(value))
-                        frame.pc += 1
+                        assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
+
+                        try:
+                            value = array.values[index.value]
+                        except IndexError:
+                            output = "out of bounds"
+                        else:
+                            frame.stack.push(jvmc.StackInt(value))
+                            frame.pc += 1
 
                 case a:
                     raise NotImplementedError(f"Unhandled array type {t!r}")
@@ -249,11 +266,15 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
             ref = frame.stack.pop()
             assert isinstance(ref, jvmc.StackReference), f"expected reference, but got {ref!r}"
 
-            array = state.heap[ref]
-            assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
+            try:
+                array = state.heap[ref]
+            except IndexError:
+                output = "null pointer"
+            else:
+                assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
 
-            frame.stack.push(jvmc.StackInt(len(array.values)))
-            frame.pc += 1
+                frame.stack.push(jvmc.StackInt(len(array.values)))
+                frame.pc += 1
 
         case jvm.Incr(index=i, amount=a):
             # The value const is first sign-extended to an int, and then the local variable at index is incremented by that amount.
