@@ -13,7 +13,7 @@ def main():
     absmethodid = jpamb.getmethodid(
         "syntaxer",
         "1.0",
-        "Stephen Hawk Tuah",
+        "Stephen Walking",
         ["syntactic", "python"],
         for_science=True,
     )

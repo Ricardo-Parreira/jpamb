@@ -387,7 +387,7 @@ class Summary(sexpr.AsSExpr):
             experiments[r.experiment] = score
 
         def invalidate() -> str | None:
-            if self.config.analysis.group == "The Rice Theorem Cookers":
+            if self.config.analysis.group == "Stephen Walking":
                 return "You must pick a group name which is different from 'The Rice Theorem Cookers'"
 
             if self.config.max_steps != 100:
