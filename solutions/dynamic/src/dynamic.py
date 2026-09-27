@@ -151,7 +151,7 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                     frame.stack.push(ref)
                     frame.pc += 1
                 case jvm.Char():
-                    ref = state.heap.new(jvmc.HeapArray(t, ['\u0000'] * count.value))
+                    ref = state.heap.new(jvmc.HeapArray(t, [0] * count.value))
                     frame.stack.push(ref)
                     frame.pc += 1
                 case a:
@@ -219,6 +219,23 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
         case jvm.ArrayLoad(type=t):
             match t:
                 case jvm.Int():
+                    index, ref = frame.stack.pop(), frame.stack.pop()
+                    assert isinstance(index, jvmc.StackInt), f"expected int, but got {index!r}"
+                    try:
+                        array = state.heap[ref]
+                    except IndexError:
+                        output = "null pointer"
+                    else:
+                        assert isinstance(array, jvmc.HeapArray), f"expected array, but got {array!r}"
+
+                        try:
+                            value = array.values[index.value]
+                        except IndexError:
+                            output = "out of bounds"
+                        else:
+                            frame.stack.push(jvmc.StackInt(value))
+                            frame.pc += 1
+                case jvm.Char():
                     index, ref = frame.stack.pop(), frame.stack.pop()
                     assert isinstance(index, jvmc.StackInt), f"expected int, but got {index!r}"
                     try:
