@@ -60,10 +60,22 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 case jvm.Int():
                     frame.stack.push(jvmc.StackInt(v))
                     frame.pc += 1
+                case jvm.Char():
+                    frame.stack.push(jvmc.StackInt(ord(v)))
+                    frame.pc += 1
                 case jvm.Boolean():
                     frame.stack.push(jvmc.StackInt(1 if v else 0))
                     frame.pc += 1
                 case jvm.Reference():
+                    frame.stack.push(jvmc.StackReference(v))
+                    frame.pc += 1
+                #hardcoded for strings
+                case jvm.Object(name=jvm.ClassName("java.lang.String")):
+                    assert isinstance(v, str), f"expected string, but got {v!r}"
+                    reference = state.heap.new(jvmc.HeapString(v))
+                    frame.stack.push(reference)
+                    frame.pc += 1
+                case jvm.Object():
                     frame.stack.push(jvmc.StackReference(v))
                     frame.pc += 1
                 case a:
@@ -319,13 +331,44 @@ def step(bc: jpamb.Bytecode, state: jvmc.State) -> tuple[jvmc.PC, jvmc.State | s
                 callee.locals[index] = frame.stack.pop()
             state.frames.push(callee)
 
-        # idk if they are supposed to say
+        # hardcoded for strings
         case jvm.InvokeVirtual(method=methodid):
-            method = bc.getmethod(methodid)
-            callee = jvmc.Frame.from_method(method)
-            for index in reversed(range(len(methodid.extension.params))):
-                callee.locals[index] = frame.stack.pop()
-            state.frames.push(callee)
+            if (
+                methodid.classname == jvm.ClassName("java.lang.String")
+                and methodid.extension.name == "equals"
+            ):
+                argument = frame.stack.pop()
+                receiver = frame.stack.pop()
+                assert isinstance(argument, jvmc.StackReference), (
+                    f"expected reference argument, but got {argument!r}"
+                )
+                assert isinstance(receiver, jvmc.StackReference), (
+                    f"expected string receiver, but got {receiver!r}"
+                )
+
+                try:
+                    receiver_string = state.heap[receiver]
+                except IndexError:
+                    output = "null pointer"
+                else:
+                    assert isinstance(receiver_string, jvmc.HeapString)
+                    if argument.value == 0:
+                        equal = False
+                    else:
+                        argument_string = state.heap[argument]
+                        equal = (
+                            isinstance(argument_string, jvmc.HeapString)
+                            and receiver_string.content == argument_string.content
+                        )
+                    frame.stack.push(jvmc.StackInt(int(equal)))
+                    frame.pc += 1
+            else:
+                method = bc.getmethod(methodid)
+                callee = jvmc.Frame.from_method(method)
+                for index in reversed(range(len(methodid.extension.params))):
+                    callee.locals[index + 1] = frame.stack.pop()
+                callee.locals[0] = frame.stack.pop()
+                state.frames.push(callee)
 
         case jvm.InvokeSpecial(method=methodid):
             method = bc.getmethod(methodid)
@@ -418,6 +461,37 @@ def fuzz_input(rand: random.Random, methodid: jvm.AbsMethodID) -> jpamb.case.Inp
                 input.append(jpamb.case.Int(rand.randint(-(1 << 31), 1 << 31)))
             case jvm.Boolean():
                 input.append(jpamb.case.Boolean(1 == rand.randint(0, 1)))
+            case jvm.Array():
+                match p.contains:
+                    case jvm.Int():
+                        input.append(
+                            jpamb.case.Array(
+                                contains=jvm.Int(),
+                                values=[
+                                    rand.randint(-(1 << 31), 1 << 31)
+                                    for _ in range(rand.randint(0, 10))
+                                ],
+                            )
+                        )
+                    case jvm.Char():
+                        input.append(
+                            jpamb.case.Array(
+                                contains=jvm.Char(),
+                                values=[
+                                    chr(rand.randint(0, 255))
+                                    for _ in range(rand.randint(0, 10))
+                                ],
+                            )
+                        )
+            case jvm.Object(name=jvm.ClassName("java.lang.String")):
+                input.append(
+                    jpamb.case.String(
+                        value="".join(
+                            chr(rand.randint(0, 255)) for _ in range(rand.randint(0, 10))
+                        )
+                    )
+                )
+                
             case a:
                 raise NotImplementedError(
                     "Don't know how to create random values for {input}"
@@ -432,7 +506,7 @@ def analyse():
     methodid = jpamb.getmethodid(
         "dynamic",
         "1.0",
-        "The Rice Theorem Cookers",
+        "Stephen Walking",
         ["dynamic", "python"],
         for_science=True,
     )
@@ -460,6 +534,10 @@ def analyse():
                 break
 
     for query in jpamb.QUERIES:
+        if not input.values:
+            print(f"{query};no")
+        else:
+            print(f"{query};not-found")
         if query in behaviors:
             if query == "*":
                 print(f"{query};timeout")
