@@ -171,6 +171,8 @@ class SignSet(Abstraction, Lattice):
     def abstract(cls, values: Iterable[jvms.StackValue]) -> Self:
         signs = set()
         for value in values:
+            if value is None:
+                continue
             signs.add(to_sign(value))
         return cls(frozenset(signs))
 
@@ -229,22 +231,29 @@ class SignSet(Abstraction, Lattice):
                     if 0 in other.signs:
                         output.update([1])
                 if 0 in self.signs:
-                    output.update(other.signs)
+                    if 0 in other.signs:
+                        output.add(0)
+                    if 1 in other.signs:
+                        output.add(-1)
+                    if -1 in other.signs:
+                        output.add(1)
 
                 return (SignSet(output), set())
 
             case jvm.BinaryOpr.Mul:
                 output = set()
                 if 1 in self.signs:
-                    output.add(1)
                     if -1 in other.signs:
                         output.add(-1)
+                    if 1 in other.signs:
+                        output.add(1)
                     if 0 in other.signs:
                         output.add(0)
                 if -1 in self.signs:
-                    output.add(-1)
                     if -1 in other.signs:
                         output.add(1)
+                    if 1 in other.signs:
+                        output.add(-1)
                     if 0 in other.signs:
                         output.add(0)
                 if 0 in self.signs:
@@ -252,24 +261,45 @@ class SignSet(Abstraction, Lattice):
 
                 return (SignSet(output), set())
 
-            case jvm.BinaryOpr.Div:
-                # what should we do if there is a division by zero??
-                
+            case jvm.BinaryOpr.Rem:
+                # what should we do if there is a division by zero??      
                 output = set()
                 if 1 in self.signs:
                     output.add(1)
-                    if -1 in other.signs:
-                        output.add(-1)
+                    output.add(-1)
+                    output.add(0)
                 if -1 in self.signs:
                     output.add(-1)
+                    output.add(1)
+                    output.add(0)
+                
+                if 0 in self.signs:
+                    output.add(0)
+
+                return (SignSet(output), set())
+            
+            case jvm.BinaryOpr.Div:
+                # what should we do if there is a division by zero??      
+                output = set()
+                if 1 in self.signs:
+                    # output.add(1) # if it is positive, divided by a negatigative, it will be negative
+                    if -1 in other.signs:
+                        output.add(-1)
+                    if 1 in other.signs:
+                        output.add(1)
+                if -1 in self.signs:
+                    if 1 in other.signs:
+                        output.add(-1)
                     if -1 in other.signs:
                         output.add(1)
                 
                 if 0 in self.signs:
                     output.add(0)
 
-            case _:
-                raise NotImplementedError(f"TODO: {opr}")
+                return (SignSet(output), set())
+
+            case a:
+                raise NotImplementedError(f"TODO: {a!r}")
 
     def compare(self, other: "SignSet", opr: jvm.CmpOpr) -> Iterable[bool]:
         match opr:
@@ -290,13 +320,7 @@ class SignSet(Abstraction, Lattice):
                 cases = set()
                 for x in self.signs:
                     for y in other.signs:
-                        if x == 0 or y == 0:
-                            cases.add(x < y)
-                            continue
-                        if x < y:
-                            cases.add(True)
-                        if x > y:
-                            cases.add(False)
+                        cases.add(x < y)
                         if x == y:
                             cases.update([False, True])
                 return cases
@@ -318,13 +342,7 @@ class SignSet(Abstraction, Lattice):
                 cases = set()
                 for x in self.signs:
                     for y in other.signs:
-                        if x == 0 or y == 0:
-                            cases.add(x > y)
-                            continue
-                        if x > y:
-                            cases.add(True)
-                        if x < y:
-                            cases.add(False)
+                        cases.add(x > y)
                         if x == y:
                             cases.update([False, True])
                 return cases
@@ -333,7 +351,11 @@ class SignSet(Abstraction, Lattice):
                 cases = set()
                 for x in self.signs:
                     for y in other.signs:
-                        cases.add(x == y)
+                        if x != y:
+                            cases.add(False)
+                        else:
+                            cases.add(True)
+                            cases.add(False)
                 return cases
 
             case jvm.CmpOpr.Ne:

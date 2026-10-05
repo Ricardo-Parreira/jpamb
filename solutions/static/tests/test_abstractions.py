@@ -2,6 +2,8 @@ import abstractions as ab
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
+import math
+from abstractions import SignSet
 
 import jvm
 import jvm.state as jvms
@@ -48,8 +50,24 @@ def arithmetic(opr, x, y):
     match opr:
         case jvm.BinaryOpr.Add:
             return jvms.StackInt(x.value + y.value)
-        case _:
-            raise NotImplementedError("TODO")
+        case jvm.BinaryOpr.Sub:
+            return jvms.StackInt(x.value - y.value)
+        case jvm.BinaryOpr.Mul:
+            return jvms.StackInt(x.value * y.value)
+        case jvm.BinaryOpr.Div:
+            if y.value == 0:
+                return 
+            result = x.value / y.value
+            if result > 0:
+                return jvms.StackInt(int(math.ceil(result)))
+            else:
+                return jvms.StackInt(int(math.floor(result)))
+        case jvm.BinaryOpr.Rem:
+            if y.value == 0:
+                return
+            return jvms.StackInt(x.value % y.value)
+        case a:
+            raise NotImplementedError(f"TODO: {a!r}")
 
 
 @given(
@@ -73,12 +91,22 @@ def compare(opr, x, y):
     match opr:
         case jvm.CmpOpr.Le:
             return x.value <= y.value
-        case _:
-            raise NotImplementedError("TODO")
+        case jvm.CmpOpr.Lt:
+            return x.value < y.value
+        case jvm.CmpOpr.Ge:
+            return x.value >= y.value
+        case jvm.CmpOpr.Gt:
+            return x.value > y.value
+        case jvm.CmpOpr.Eq:
+            return x.value == y.value
+        case jvm.CmpOpr.Ne:
+            return x.value != y.value
+        case a:
+            raise NotImplementedError(f"TODO: {a!r}")
 
 
 @given(
-    st.sampled_from([jvm.CmpOpr.Le]),
+    st.sampled_from(jvm.CmpOpr),
     st.sets(st_stack_ints()),
     st.sets(
         st_stack_ints(),
