@@ -125,7 +125,10 @@ class Abstraction(ABC):
     @classmethod
     @abstractmethod
     def abstract(cls, values: Iterable[jvms.StackValue]) -> Self:
-        raise NotImplementedError(f"abstract: {cls}")
+        set = {min(values).to_sign(), max(values).to_sign()}
+        if (0 in values):
+            set.add(0)
+        return SignSet(set)
 
     @abstractmethod
     def __contains__(self, value: jvms.StackValue) -> bool: ...
@@ -395,23 +398,71 @@ class Interval(Abstraction, Lattice):
 
     @classmethod
     def abstract(cls, values: Iterable[jvms.StackValue]) -> Self:
-        raise NotImplementedError("TODO")
+        return Interval(min(values), max(values))
 
     def __contains__(self, value: jvms.StackValue) -> bool:
-        raise NotImplementedError("TODO")
+        if(self.min is not None and value.value < self.min) or (
+            self.max is not None and value.value > self.max
+        ):
+            return False
+        return True
 
     @classmethod
     def top(cls) -> Self:
-        raise NotImplementedError("TODO")
+        return Interval(None, None)
 
     def __or__(self, other: "Interval") -> "Interval":
-        raise NotImplementedError("TODO")
+        if (self.min and self.max) is None and (other.min and other.max) is None:
+            return Interval(None, None)
+        
+        if self.min is None:
+            new_min = other.min
+        elif other.min is None:
+            new_min = self.min
+        else:
+            new_min = min(self.min, other.min)
+
+        if self.max is None:
+            new_max = other.max
+        elif other.max is None:
+            new_max = self.max
+        else:
+            new_max = max(self.max, other.max)
+
+        return Interval(new_min, new_max)
 
     def __and__(self, other: "Interval") -> "Interval":
-        raise NotImplementedError("TODO")
+        if (self.min and self.max) is None and (other.min and other.max) is None:
+            return Interval(None, None)
+        
+        if self.min is None:
+            new_min = other.min
+        elif other.min is None:
+            new_min = self.min
+        else:
+            new_min = max(self.min, other.min)
+
+        if self.max is None:
+            new_max = other.max
+        elif other.max is None:
+            new_max = self.max
+        else:
+            new_max = min(self.max, other.max)
+
+        return Interval(new_min, new_max)
 
     def __lt__(self, other: "Interval") -> bool:
-        raise NotImplementedError("TODO")
+        # if self is less than other, then self is strictly contained in other
+        if (other.min == None or other.max == None):
+            return False
+        if (self.min >= other.min and self.max <= other.max):
+            return True
+        return False 
 
     def __gt__(self, other: "Interval") -> bool:
-        raise NotImplementedError("TODO")
+        # if self is greater than other, then self strictly contains other
+        if (self.min == None or self.max == None):
+            return False
+        if (self.min <= other.min and self.max >= other.max):
+            return True
+        return False 
