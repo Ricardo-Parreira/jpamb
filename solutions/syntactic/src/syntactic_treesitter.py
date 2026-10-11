@@ -15,7 +15,7 @@ def main():
     methodid = jpamb.getmethodid(
         "syntaxer",
         "1.0",
-        "The Rice Theorem Cookers",
+        "Stephen Walking",
         ["syntactic", "python"],
         for_science=True,
     )

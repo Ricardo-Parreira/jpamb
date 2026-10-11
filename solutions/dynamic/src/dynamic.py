@@ -432,7 +432,7 @@ def interpret():
     methodid, input, max_steps = jpamb.getcase(
         "dynamic",
         "1.0",
-        "The Rice Theorem Cookers",
+        "Stephen Walking",
         ["dynamic", "python"],
         for_science=True,
     )

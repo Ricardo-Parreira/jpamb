@@ -50,6 +50,22 @@ class State(sexpr.AsSExpr):
         )
 
 
+def abstract_push_value(value) -> SignSet:
+    match value:
+        case bool() as b:
+            return SignSet.abstract([StackInt(int(b))])
+        case int() as i:
+            return SignSet.abstract([StackInt(i)])
+        case str():
+            return SignSet.top()
+        case StackInt() as v:
+            return SignSet.abstract([v])
+        case None:
+            return SignSet.top()
+        case _:
+            return SignSet.top()
+
+
 def manystep(
     bc: jpamb.Bytecode,
     pc: PC,
@@ -57,18 +73,28 @@ def manystep(
 ) -> Iterable[tuple[PC, object] | str]:
     opr = bc[pc]
     match opr:
+        case jvm.Push(type=t, value=v):
+            match t:
+                case jvm.Int() | jvm.Boolean():
+                    va = abstract_push_value(int(v))
+                case jvm.Char():
+                    va = abstract_push_value(ord(v))
+                case jvm.Reference() | jvm.Object() | jvm.Array():
+                    va = SignSet.top()
+                case _:
+                    raise NotImplementedError(f"Unhandled push type {t!r}")
+            yield (pc + 1, state.push(va))
+
         case jvm.Get(static=True, field=field):
-            # Hack - Only handle the assertion case
-            assert field.extension.name == "$assertionsDisabled"
-
-            # Hack - Assuming assertions are never disabled
-            va = SignSet.abstract([StackInt(0)])
-
+            # Hack - Only handle the assertion case; everything else is treated as a constant 0.
+            if field.extension.name != "$assertionsDisabled":
+                va = SignSet.abstract([StackInt(0)])
+            else:
+                va = SignSet.abstract([StackInt(0)])
             yield (pc + 1, state.push(va))
 
         case jvm.Ifz(condition=op, target=target):
             [val], after = state.pop(1)
-
             for res in SignSet.compare(val, SignSet.abstract([StackInt(0)]), op):
                 match res:
                     case True:
@@ -78,20 +104,40 @@ def manystep(
                     case err:
                         yield err
 
-        case jvm.Load(index=i):
+        case jvm.If(condition=op, target=target):
+            [v2, v1], after = state.pop(2)
+            for res in SignSet.compare(v1, v2, op):
+                match res:
+                    case True:
+                        yield (pc % target, after)
+                    case False:
+                        yield (pc + 1, after)
+                    case err:
+                        yield err
+
+        case jvm.Load(type=t, index=i):
             va = state.load(i)
             yield (pc + 1, state.push(va))
+
+        case jvm.Store(type=t, index=i):
+            [value], after = state.pop(1)
+            yield (pc + 1, after.store(i, value))
 
         case jvm.Goto(target=t):
             yield (pc % t, state)
 
-        case jvm.Binary(operant=op):
+        case jvm.Binary(type=t, operant=op):
             [v1, v2], after = state.pop(2)
-            for res in SignSet.arithmetic(v1, v2, op):
-                if isinstance(res, str):
-                    yield res
-                else:
-                    yield (pc + 1, after.push(res))
+
+            if t is not None and not isinstance(t, jvm.Int):
+                # keep the abstract interpreter conservative for non-int values
+                yield (pc + 1, after.push(SignSet.top()))
+            else:
+                result, errors = SignSet.arithmetic(v1, v2, op)
+                for error in errors:
+                    yield error
+                if result.signs:
+                    yield (pc + 1, after.push(result))
 
         case jvm.Return(type=None):
             yield "ok"
@@ -103,6 +149,56 @@ def manystep(
         case jvm.New(classname=jvm.ClassName("java.lang.AssertionError")):
             # Hack -- if we create an assertion error, we probably also throw it.
             yield "assertion error"
+
+        case jvm.NewArray(type=t, dim=d):
+            [count], after = state.pop(1)
+            yield (pc + 1, after.push(SignSet.top()))
+
+        case jvm.Dup():
+            [value], after = state.pop(1)
+            yield (pc + 1, after.push(value).push(value))
+
+        case jvm.ArrayStore(type=t):
+            _, after = state.pop(3)
+            yield (pc + 1, after)
+
+        case jvm.ArrayLoad(type=t):
+            _, after = state.pop(2)
+            yield (pc + 1, after.push(SignSet.top()))
+
+        case jvm.ArrayLength():
+            [ref], after = state.pop(1)
+            yield (pc + 1, after.push(SignSet.top()))
+
+        case jvm.Negate(type=jvm.Int()):
+            [value], after = state.pop(1)
+            negated = SignSet(frozenset(-sign for sign in value.signs))
+            yield (pc + 1, after.push(negated))
+
+        case jvm.Cast(from_=jvm.Int(), to_=jvm.Short()):
+            [value], after = state.pop(1)
+            casted = (
+                value
+                if value.signs == frozenset({0})
+                else SignSet.top()
+            )
+            yield (pc + 1, after.push(casted))
+
+        case jvm.InvokeVirtual(method=method) if (
+            method.classname.dotted() == "java.lang.String"
+            and method.extension.name == "equals"
+        ):
+            _, after = state.pop(2)
+            yield (pc + 1, after.push(SignSet.from_sign("0+")))
+
+        case jvm.Incr(index=i, amount=a):
+            va = state.load(i)
+            updated = SignSet.arithmetic(va, SignSet.abstract([StackInt(a)]), jvm.BinaryOpr.Add)
+            if isinstance(updated, tuple):
+                new_val, _ = updated
+                yield (pc + 1, state.store(i, new_val))
+            else:
+                yield (pc + 1, state.store(i, va))
 
         case a:
             raise NotImplementedError(f"To do:{a}")
@@ -128,6 +224,8 @@ def initialstate(
                     locals[i] = SignSet.abstract([StackInt(int(value))])
                 case jpamb.case.Array():
                     locals[i] = SignSet.from_sign("+")
+                case jpamb.case.String():
+                    locals[i] = SignSet.top()
                 case _:
                     raise NotImplementedError(f"Unsupported value {x!r}")
 
@@ -172,13 +270,76 @@ class AbstractInterpreter:
 
         return pc, finals
 
+    def closed_loop(self) -> PC | None:
+        edges: dict[PC, set[PC]] = {}
+        exits: dict[PC, bool] = {}
+
+        for pc, state in self.states.items():
+            edges[pc] = set()
+            exits[pc] = False
+            for result in manystep(self.bc, pc, state):
+                if isinstance(result, str):
+                    exits[pc] = True
+                else:
+                    edges[pc].add(result[0])
+
+        index = 0
+        indices: dict[PC, int] = {}
+        lowlinks: dict[PC, int] = {}
+        stack: list[PC] = []
+        on_stack: set[PC] = set()
+        closed_cycle: PC | None = None
+
+        def visit(pc: PC) -> None:
+            nonlocal index, closed_cycle
+            indices[pc] = index
+            lowlinks[pc] = index
+            index += 1
+            stack.append(pc)
+            on_stack.add(pc)
+
+            for successor in edges[pc]:
+                if successor not in indices:
+                    visit(successor)
+                    lowlinks[pc] = min(lowlinks[pc], lowlinks[successor])
+                elif successor in on_stack:
+                    lowlinks[pc] = min(lowlinks[pc], indices[successor])
+
+            if lowlinks[pc] != indices[pc]:
+                return
+
+            component = set()
+            while True:
+                member = stack.pop()
+                on_stack.remove(member)
+                component.add(member)
+                if member == pc:
+                    break
+
+            cyclic = len(component) > 1 or pc in edges[pc]
+            closed = all(
+                not exits[member]
+                and edges[member] <= component
+                for member in component
+            )
+            if cyclic and closed:
+                closed_cycle = pc
+
+        for pc in edges:
+            if pc not in indices:
+                visit(pc)
+            if closed_cycle is not None:
+                return closed_cycle
+
+        return None
+
 
 def interpret():
     """The static analysis"""
     methodid, input, steps = jpamb.getcase(
         "static",
         "1.0",
-        "The Rice Theorem Cookers",
+        "Stephen Walking",
         ["static", "python"],
         for_science=True,
     )
@@ -198,6 +359,9 @@ def interpret():
         x = jpamb.emit_step(x, pc, ai.states, depth=1)
         steps -= 1
 
+    if steps > 0 and (loop_pc := ai.closed_loop()) is not None:
+        jpamb.emit_step(x, loop_pc, "*", depth=1)
+
 
 def analyse():
     """The static analysis"""
@@ -205,7 +369,7 @@ def analyse():
     methodid = jpamb.getmethodid(
         "static",
         "1.0",
-        "The Rice Theorem Cookers",
+        "Stephen Walking",
         ["static", "python"],
         for_science=True,
     )

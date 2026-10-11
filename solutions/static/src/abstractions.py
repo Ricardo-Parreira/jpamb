@@ -265,41 +265,39 @@ class SignSet(Abstraction, Lattice):
                 return (SignSet(output), set())
 
             case jvm.BinaryOpr.Rem:
-                # what should we do if there is a division by zero??      
                 output = set()
-                if 1 in self.signs:
+                if other.signs - {0} and 1 in self.signs:
                     output.add(1)
                     output.add(-1)
                     output.add(0)
-                if -1 in self.signs:
+                if other.signs - {0} and -1 in self.signs:
                     output.add(-1)
                     output.add(1)
                     output.add(0)
-                
-                if 0 in self.signs:
+                if other.signs - {0} and 0 in self.signs:
                     output.add(0)
 
-                return (SignSet(output), set())
-            
+                errors = {"divide by zero"} if 0 in other.signs else set()
+                return (SignSet(output), errors)
+
             case jvm.BinaryOpr.Div:
-                # what should we do if there is a division by zero??      
                 output = set()
+                nonzero_divisors = other.signs - {0}
                 if 1 in self.signs:
-                    # output.add(1) # if it is positive, divided by a negatigative, it will be negative
-                    if -1 in other.signs:
+                    if -1 in nonzero_divisors:
                         output.add(-1)
-                    if 1 in other.signs:
+                    if 1 in nonzero_divisors:
                         output.add(1)
                 if -1 in self.signs:
-                    if 1 in other.signs:
+                    if 1 in nonzero_divisors:
                         output.add(-1)
-                    if -1 in other.signs:
+                    if -1 in nonzero_divisors:
                         output.add(1)
-                
-                if 0 in self.signs:
+                if 0 in self.signs and nonzero_divisors:
                     output.add(0)
 
-                return (SignSet(output), set())
+                errors = {"divide by zero"} if 0 in other.signs else set()
+                return (SignSet(output), errors)
 
             case a:
                 raise NotImplementedError(f"TODO: {a!r}")
