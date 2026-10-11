@@ -61,7 +61,7 @@ class Lattice(Poset):
     @classmethod
     @abstractmethod
     def top(cls) -> Self:
-        raise NotImplementedError(f"top: {cls}")
+        return Interval(None, None)
 
     @classmethod
     def bot(cls) -> Self:
@@ -398,7 +398,17 @@ class Interval(Abstraction, Lattice):
 
     @classmethod
     def abstract(cls, values: Iterable[jvms.StackValue]) -> Self:
-        return Interval(min(values), max(values))
+        numbers = []
+        for value in values:
+            match value:
+                case jvms.StackInt(number):
+                    numbers.append(number)
+                case _:
+                    raise NotImplementedError(f"Unsupported value {value!r}")
+
+        if not numbers:
+            return cls(1, 0)
+        return cls(min(numbers), max(numbers))
 
     def __contains__(self, value: jvms.StackValue) -> bool:
         if(self.min is not None and value.value < self.min) or (
@@ -412,28 +422,34 @@ class Interval(Abstraction, Lattice):
         return Interval(None, None)
 
     def __or__(self, other: "Interval") -> "Interval":
-        if (self.min and self.max) is None and (other.min and other.max) is None:
-            return Interval(None, None)
-        
-        if self.min is None:
-            new_min = other.min
-        elif other.min is None:
-            new_min = self.min
+        if self.min is not None and self.max is not None and self.min > self.max:
+            return other
+        if other.min is not None and other.max is not None and other.min > other.max:
+            return self
+
+        if self.min is None or other.min is None:
+            new_min = None
         else:
             new_min = min(self.min, other.min)
 
-        if self.max is None:
-            new_max = other.max
-        elif other.max is None:
-            new_max = self.max
+        if self.max is None or other.max is None:
+            new_max = None
         else:
             new_max = max(self.max, other.max)
 
         return Interval(new_min, new_max)
 
     def __and__(self, other: "Interval") -> "Interval":
-        if (self.min and self.max) is None and (other.min and other.max) is None:
-            return Interval(None, None)
+        if (
+            self.min is not None
+            and self.max is not None
+            and self.min > self.max
+        ) or (
+            other.min is not None
+            and other.max is not None
+            and other.min > other.max
+        ):
+            return type(self).bot()
         
         if self.min is None:
             new_min = other.min
@@ -441,6 +457,8 @@ class Interval(Abstraction, Lattice):
             new_min = self.min
         else:
             new_min = max(self.min, other.min)
+            print(f"DEBUG: comparing mins: {self.min}, {other.min} = {new_min}")
+
 
         if self.max is None:
             new_max = other.max
@@ -449,6 +467,8 @@ class Interval(Abstraction, Lattice):
         else:
             new_max = min(self.max, other.max)
 
+        if new_min is not None and new_max is not None and new_min > new_max:
+            return type(self).bot()
         return Interval(new_min, new_max)
 
     def __lt__(self, other: "Interval") -> bool:
