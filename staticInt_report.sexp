@@ -1164,10 +1164,10 @@
           ))
       )
       :duration (duration
-        :absolute 1469636265
-        :relative 2.2817271338369567
+        :absolute 1301590046
+        :relative 2.2343263497710733
       )
-      :calibrates (8577965 6786333)
+      :calibrates (7995136 7181582)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayContent:()V"
       :response (response
@@ -2319,10 +2319,10 @@
           ))
       )
       :duration (duration
-        :absolute 1479108727
-        :relative 2.3352103069979133
+        :absolute 1301977201
+        :relative 2.3349586278078154
       )
-      :calibrates (7301370 6370244)
+      :calibrates (6317392 5723946)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayContentAboveMinus13!()V"
       :response (response
@@ -3508,10 +3508,10 @@
           ))
       )
       :duration (duration
-        :absolute 1432421255
-        :relative 2.327599052223403
+        :absolute 1392248768
+        :relative 2.363392219912777
       )
-      :calibrates (7201191 6272969)
+      :calibrates (5667879 6392324)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayContentAboveMinus13:()V"
       :response (response
@@ -4697,10 +4697,10 @@
           ))
       )
       :duration (duration
-        :absolute 1426002850
-        :relative 2.3672485990474006
+        :absolute 1391193004
+        :relative 2.3225661022414297
       )
-      :calibrates (6314187 5929206)
+      :calibrates (6831418 6407463)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayInBounds!()V"
       :response (response
@@ -4924,10 +4924,10 @@
           ))
       )
       :duration (duration
-        :absolute 1317466732
-        :relative 2.2779973130783797
+        :absolute 1290368289
+        :relative 2.263732596264431
       )
-      :calibrates (7417862 6474380)
+      :calibrates (7247437 6813397)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayInBounds:()V"
       :response (response
@@ -5151,10 +5151,10 @@
           ))
       )
       :duration (duration
-        :absolute 1353306546
-        :relative 2.3442660887320486
+        :absolute 1378412026
+        :relative 2.2830814703348397
       )
-      :calibrates (6076396 6174281)
+      :calibrates (7400801 6964925)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayIsNull!()V"
       :response (response
@@ -5261,10 +5261,10 @@
           ))
       )
       :duration (duration
-        :absolute 1327176092
-        :relative 2.346861004314985
+        :absolute 1286700333
+        :relative 2.293451258446005
       )
-      :calibrates (5878641 6063922)
+      :calibrates (6670596 6422916)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayIsNull:()V"
       :response (response
@@ -5371,10 +5371,10 @@
           ))
       )
       :duration (duration
-        :absolute 1312598859
-        :relative 2.311410569821754
+        :absolute 1201241279
+        :relative 2.270536151010594
       )
-      :calibrates (5994690 6821279)
+      :calibrates (6307957 6578220)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayIsNullLength!()V"
       :response (response
@@ -5551,10 +5551,10 @@
           ))
       )
       :duration (duration
-        :absolute 1323640600
-        :relative 2.357768821645124
+        :absolute 1215540991
+        :relative 2.2854406407800227
       )
-      :calibrates (5926271 5689051)
+      :calibrates (6321633 6278031)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayIsNullLength:()V"
       :response (response
@@ -5731,10 +5731,10 @@
           ))
       )
       :duration (duration
-        :absolute 1305656970
-        :relative 2.276137437591195
+        :absolute 1280312693
+        :relative 2.3078932003012516
       )
-      :calibrates (7657737 6169062)
+      :calibrates (6060116 6542272)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayLength!()V"
       :response (response
@@ -6081,10 +6081,10 @@
           ))
       )
       :duration (duration
-        :absolute 1331299054
-        :relative 2.3463346948512047
+        :absolute 1318755554
+        :relative 2.2125935228359217
       )
-      :calibrates (5941910 6052280)
+      :calibrates (10132247 6033686)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayLength:()V"
       :response (response
@@ -6431,10 +6431,10 @@
           ))
       )
       :duration (duration
-        :absolute 1331521500
-        :relative 2.306743914125714
+        :absolute 1354814808
+        :relative 2.1145774372228376
       )
-      :calibrates (6604519 6536658)
+      :calibrates (14499849 6313046)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayNotEmpty!([I:1])V"
       :response (response
@@ -6577,10 +6577,10 @@
           ))
       )
       :duration (duration
-        :absolute 1340569111
-        :relative 2.3417467990025402
+        :absolute 1333012534
+        :relative 2.332442823692664
       )
-      :calibrates (6492596 5713377)
+      :calibrates (6477578 5922414)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayNotEmpty!([I:])V"
       :response (response
@@ -6723,10 +6723,10 @@
           ))
       )
       :duration (duration
-        :absolute 1334318455
-        :relative 2.3547873973288613
+        :absolute 1322080236
+        :relative 2.3342736230830914
       )
-      :calibrates (5933554 5856128)
+      :calibrates (6415672 5830890)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayNotEmpty:([I)V"
       :response (response
@@ -6869,10 +6869,10 @@
           ))
       )
       :duration (duration
-        :absolute 1280805444
-        :relative 2.2899636729722883
+        :absolute 1333354383
+        :relative 2.3198792464853564
       )
-      :calibrates (7129846 6008766)
+      :calibrates (6154175 6613045)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayOutOfBounds!()V"
       :response (response
@@ -7096,10 +7096,10 @@
           ))
       )
       :duration (duration
-        :absolute 1307528005
-        :relative 2.343493319148996
+        :absolute 1334051988
+        :relative 2.3414453929657704
       )
-      :calibrates (6047091 5810260)
+      :calibrates (6039997 6115070)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arrayOutOfBounds:()V"
       :response (response
@@ -7323,10 +7323,10 @@
           ))
       )
       :duration (duration
-        :absolute 1321364543
-        :relative 2.2988997673220655
+        :absolute 1333820214
+        :relative 2.3336905384661546
       )
-      :calibrates (7394719 5883899)
+      :calibrates (6365957 6005953)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySometimesNull!(0)V"
       :response (response
@@ -7472,10 +7472,10 @@
           ))
       )
       :duration (duration
-        :absolute 1310016159
-        :relative 2.3252064600817657
+        :absolute 1347371738
+        :relative 2.3362874830265983
       )
-      :calibrates (5928365 6462459)
+      :calibrates (6440080 5983019)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySometimesNull!(11)V"
       :response (response
@@ -7688,10 +7688,10 @@
           ))
       )
       :duration (duration
-        :absolute 1301390334
-        :relative 2.34426253119238
+        :absolute 1331132908
+        :relative 2.3346095117754992
       )
-      :calibrates (5969434 5811373)
+      :calibrates (5971217 6349668)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySometimesNull:(I)V"
       :response (response
@@ -7904,10 +7904,10 @@
           ))
       )
       :duration (duration
-        :absolute 1314829730
-        :relative 2.3117431667459587
+        :absolute 1303808342
+        :relative 2.3100939385806236
       )
-      :calibrates (7099318 5728605)
+      :calibrates (6046219 6722573)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySpellsHello!([C:'h', 'e', 'l', 'l', 'o'])V"
       :response (response
@@ -8344,10 +8344,10 @@
           ))
       )
       :duration (duration
-        :absolute 1344836236
-        :relative 2.265921559878236
+        :absolute 1402241610
+        :relative 2.3153113086848847
       )
-      :calibrates (8496862 6083820)
+      :calibrates (7686604 5882199)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySpellsHello!([C:'x'])V"
       :response (response
@@ -8784,10 +8784,10 @@
           ))
       )
       :duration (duration
-        :absolute 1345245824
-        :relative 2.296040411431456
+        :absolute 1357253029
+        :relative 2.334346658248405
       )
-      :calibrates (7597513 6010391)
+      :calibrates (6514429 6055828)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySpellsHello!([C:])V"
       :response (response
@@ -9224,10 +9224,10 @@
           ))
       )
       :duration (duration
-        :absolute 1342555045
-        :relative 2.3219255400225434
+        :absolute 1325522381
+        :relative 2.272426778641136
       )
-      :calibrates (7132170 5662720)
+      :calibrates (7654975 6502646)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySpellsHello:([C)V"
       :response (response
@@ -9664,10 +9664,10 @@
           ))
       )
       :duration (duration
-        :absolute 1357765148
-        :relative 2.3421402239048046
+        :absolute 1313976531
+        :relative 2.291392281788605
       )
-      :calibrates (6404599 5946751)
+      :calibrates (6546890 6887728)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySumIsLarge!([I:50, 100, 200])V"
       :response (response
@@ -10371,10 +10371,10 @@
           ))
       )
       :duration (duration
-        :absolute 1436533000
-        :relative 2.3353162419897298
+        :absolute 1417762104
+        :relative 2.2869304313351133
       )
-      :calibrates (6902845 6371997)
+      :calibrates (8314727 6330730)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySumIsLarge!([I:])V"
       :response (response
@@ -11078,10 +11078,10 @@
           ))
       )
       :duration (duration
-        :absolute 1368884430
-        :relative 2.3074928856132693
+        :absolute 1320556494
+        :relative 2.313432526047356
       )
-      :calibrates (7480562 6006082)
+      :calibrates (6705481 6128295)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.arraySumIsLarge:([I)V"
       :response (response
@@ -11785,10 +11785,10 @@
           ))
       )
       :duration (duration
-        :absolute 1386453996
-        :relative 2.199467895062691
+        :absolute 1371475531
+        :relative 2.295177858214041
       )
-      :calibrates (10891357 6625959)
+      :calibrates (7873279 6027534)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.binarySearch!(3)V"
       :response (response
@@ -13495,10 +13495,10 @@
           ))
       )
       :duration (duration
-        :absolute 1581319677
-        :relative 2.314918576163079
+        :absolute 1585889330
+        :relative 2.4003403674270274
       )
-      :calibrates (8963627 6351870)
+      :calibrates (6728966 5888220)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.binarySearch!(6)V"
       :response (response
@@ -15205,10 +15205,10 @@
           ))
       )
       :duration (duration
-        :absolute 1565673881
-        :relative 2.365627094951893
+        :absolute 1576228552
+        :relative 2.3942769796665626
       )
-      :calibrates (7237530 6255336)
+      :calibrates (6742260 5974375)
     ) (interpret-result
       :experiment "jpamb.cases.Arrays.binarySearch:(I)V"
       :response (response
@@ -16915,10 +16915,10 @@
           ))
       )
       :duration (duration
-        :absolute 1596285454
-        :relative 2.4118642513849333
+        :absolute 1564468165
+        :relative 2.409694922426605
       )
-      :calibrates (6296314 6071026)
+      :calibrates (6321924 5859605)
     ) (interpret-result
       :experiment "jpamb.cases.Calls.allPrimesArePositive!(-1)V"
       :response -
@@ -17351,10 +17351,10 @@
           ))
       )
       :duration (duration
-        :absolute 1321379744
-        :relative 2.3330091808723803
+        :absolute 1266303358
+        :relative 2.3196931334725335
       )
-      :calibrates (6258452 6017310)
+      :calibrates (6033839 6096547)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.badNormalizedDistance!(1, 1)I"
       :response (response
@@ -17689,10 +17689,10 @@
           ))
       )
       :duration (duration
-        :absolute 1327483036
-        :relative 2.3398674420310868
+        :absolute 1318510147
+        :relative 2.299275020337931
       )
-      :calibrates (6271283 5867958)
+      :calibrates (7381546 5856944)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.badNormalizedDistance:(II)I"
       :response (response
@@ -18261,10 +18261,10 @@
           ))
       )
       :duration (duration
-        :absolute 1340918526
-        :relative 2.2848218868987193
+        :absolute 1359578474
+        :relative 2.343595622909564
       )
-      :calibrates (6987503 6931576)
+      :calibrates (6249859 6076609)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.divisionLoop!(0)V"
       :response (response
@@ -18423,10 +18423,10 @@
           ))
       )
       :duration (duration
-        :absolute 1310319199
-        :relative 2.324346701414286
+        :absolute 1277699422
+        :relative 2.2574391846348307
       )
-      :calibrates (6515156 5903094)
+      :calibrates (8063341 6062669)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.divisionLoop!(1)V"
       :response (response
@@ -18654,10 +18654,10 @@
           ))
       )
       :duration (duration
-        :absolute 1329195426
-        :relative 2.3465119123364566
+        :absolute 1294072929
+        :relative 2.2953914559004405
       )
-      :calibrates (6054551 5915801)
+      :calibrates (7209697 5900140)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.divisionLoop:(I)V"
       :response (response
@@ -18885,10 +18885,10 @@
           ))
       )
       :duration (duration
-        :absolute 1320385534
-        :relative 2.242054551105793
+        :absolute 1280416000
+        :relative 2.250257191733025
       )
-      :calibrates (8489376 6634956)
+      :calibrates (7646797 6745294)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.normalizedDistance!(0, 0)I"
       :response (response
@@ -19008,10 +19008,10 @@
           ))
       )
       :duration (duration
-        :absolute 1287798048
-        :relative 2.33454689144433
+        :absolute 1346229624
+        :relative 2.2548120640027927
       )
-      :calibrates (5951539 5969960)
+      :calibrates (8351914 6622060)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.normalizedDistance:(II)I"
       :response (response
@@ -19788,10 +19788,10 @@
           ))
       )
       :duration (duration
-        :absolute 1333071576
-        :relative 2.361618479262265
+        :absolute 1319644467
+        :relative 2.3333926487954155
       )
-      :calibrates (5785320 5809526)
+      :calibrates (6081624 6167197)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.safeDivByN!(0)I"
       :response (response
@@ -19926,10 +19926,10 @@
           ))
       )
       :duration (duration
-        :absolute 1324158829
-        :relative 2.297601676718601
+        :absolute 1294150943
+        :relative 2.3171581225361226
       )
-      :calibrates (7075269 6271262)
+      :calibrates (6629396 5840327)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.safeDivByN!(1)I"
       :response (response
@@ -20023,10 +20023,10 @@
           ))
       )
       :duration (duration
-        :absolute 1306017504
-        :relative 2.291453747351245
+        :absolute 1280841639
+        :relative 2.3361006028567646
       )
-      :calibrates (7097129 6254223)
+      :calibrates (6030327 5784431)
     ) (interpret-result
       :experiment "jpamb.cases.Dependent.safeDivByN:(I)I"
       :response (response
@@ -20210,10 +20210,10 @@
           ))
       )
       :duration (duration
-        :absolute 1271738753
-        :relative 2.3272450868247994
+        :absolute 1258017592
+        :relative 2.2762286247365653
       )
-      :calibrates (5982298 5990146)
+      :calibrates (6775722 6543783)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.forever!()V"
       :response (response
@@ -20242,10 +20242,10 @@
           ))
       )
       :duration (duration
-        :absolute 1293790051
-        :relative 2.349776894333225
+        :absolute 1289613540
+        :relative 2.3227942674145647
       )
-      :calibrates (5845608 5718627)
+      :calibrates (6312643 5953141)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.forever:()V"
       :response (response
@@ -20274,10 +20274,10 @@
           ))
       )
       :duration (duration
-        :absolute 1284439014
-        :relative 2.2982581324354054
+        :absolute 1299546808
+        :relative 2.339046013250684
       )
-      :calibrates (6753602 6173029)
+      :calibrates (5874792 6031483)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.neverAsserts!()V"
       :response (response
@@ -20358,10 +20358,10 @@
           ))
       )
       :duration (duration
-        :absolute 1313631165
-        :relative 2.336093851185641
+        :absolute 1328834952
+        :relative 2.334441832715295
       )
-      :calibrates (6084682 6032722)
+      :calibrates (6361873 5942492)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.neverAsserts:()V"
       :response (response
@@ -20442,10 +20442,10 @@
           ))
       )
       :duration (duration
-        :absolute 1320305962
-        :relative 2.3483530243940947
+        :absolute 1290378926
+        :relative 2.336251757441148
       )
-      :calibrates (5946849 5893147)
+      :calibrates (5938254 5960336)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.neverDivides!()I"
       :response (response
@@ -20526,10 +20526,10 @@
           ))
       )
       :duration (duration
-        :absolute 1325022329
-        :relative 2.359188792605212
+        :absolute 1335981420
+        :relative 2.346691411112666
       )
-      :calibrates (5880084 5709408)
+      :calibrates (5927844 6098649)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.neverDivides:()I"
       :response (response
@@ -20610,10 +20610,10 @@
           ))
       )
       :duration (duration
-        :absolute 1293282881
-        :relative 2.333130907020934
+        :absolute 1403135944
+        :relative 2.3352798523851845
       )
-      :calibrates (6181545 5829827)
+      :calibrates (6589651 6377659)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.terminates!()V"
       :response (response
@@ -20889,10 +20889,10 @@
           ))
       )
       :duration (duration
-        :absolute 1326962193
-        :relative 2.33141304072219
+        :absolute 1344117649
+        :relative 2.352205798306972
       )
-      :calibrates (5851924 6521090)
+      :calibrates (5813668 6133404)
     ) (interpret-result
       :experiment "jpamb.cases.Loops.terminates:()V"
       :response (response
@@ -21168,10 +21168,10 @@
           ))
       )
       :duration (duration
-        :absolute 1294926072
-        :relative 2.343519875627623
+        :absolute 1275301865
+        :relative 2.280168960318999
       )
-      :calibrates (5870484 5871868)
+      :calibrates (7090942 6289610)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertBoolean!(false)V"
       :response (response
@@ -21252,10 +21252,10 @@
           ))
       )
       :duration (duration
-        :absolute 1306104623
-        :relative 2.3084610683935805
+        :absolute 1322689814
+        :relative 2.283341101090309
       )
-      :calibrates (6928002 5911462)
+      :calibrates (7944542 5832212)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertBoolean!(true)V"
       :response (response
@@ -21336,10 +21336,10 @@
           ))
       )
       :duration (duration
-        :absolute 1265134197
-        :relative 2.32693996135845
+        :absolute 1313399303
+        :relative 2.3255442839111007
       )
-      :calibrates (6066177 5852461)
+      :calibrates (5925959 6487205)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertBoolean:(Z)V"
       :response (response
@@ -21465,10 +21465,10 @@
           ))
       )
       :duration (duration
-        :absolute 1264297088
-        :relative 2.26711786234077
+        :absolute 1305542115
+        :relative 2.3375228624223
       )
-      :calibrates (7678318 5991454)
+      :calibrates (6097205 5906022)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertFalse!()V"
       :response (response
@@ -21523,10 +21523,10 @@
           ))
       )
       :duration (duration
-        :absolute 1311831755
-        :relative 2.333688220279629
+        :absolute 1253118751
+        :relative 2.2775061728081356
       )
-      :calibrates (6286925 5881095)
+      :calibrates (7243132 5985534)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertFalse:()V"
       :response (response
@@ -21581,10 +21581,10 @@
           ))
       )
       :duration (duration
-        :absolute 1298055556
-        :relative 2.3374356861528334
+        :absolute 1297126960
+        :relative 2.2641874428543676
       )
-      :calibrates (5965094 5971697)
+      :calibrates (6002957 8116729)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertInteger!(0)V"
       :response (response
@@ -21665,10 +21665,10 @@
           ))
       )
       :duration (duration
-        :absolute 1298725327
-        :relative 2.3222699867985646
+        :absolute 1295038909
+        :relative 2.2789770346789746
       )
-      :calibrates (6033584 6333785)
+      :calibrates (7613384 6011593)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertInteger!(1)V"
       :response (response
@@ -21749,10 +21749,10 @@
           ))
       )
       :duration (duration
-        :absolute 1299211704
-        :relative 2.3445333599728224
+        :absolute 1338544013
+        :relative 2.3299606521058864
       )
-      :calibrates (5945186 5808567)
+      :calibrates (6217094 6305722)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertInteger:(I)V"
       :response (response
@@ -21878,10 +21878,10 @@
           ))
       )
       :duration (duration
-        :absolute 1306489010
-        :relative 2.342798547045957
+        :absolute 1326263400
+        :relative 2.3212320781627573
       )
-      :calibrates (5892236 5974662)
+      :calibrates (6251959 6407866)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertPositive!(-1)V"
       :response (response
@@ -21962,10 +21962,10 @@
           ))
       )
       :duration (duration
-        :absolute 1317915542
-        :relative 2.3462336365721295
+        :absolute 1303869252
+        :relative 2.3233637154887785
       )
-      :calibrates (5975273 5901103)
+      :calibrates (6137973 6247150)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertPositive!(1)V"
       :response (response
@@ -22046,10 +22046,10 @@
           ))
       )
       :duration (duration
-        :absolute 1433466540
-        :relative 2.316773526302314
+        :absolute 1305088327
+        :relative 2.339634621750184
       )
-      :calibrates (5862900 7961428)
+      :calibrates (5904831 6036020)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertPositive:(I)V"
       :response (response
@@ -22175,10 +22175,10 @@
           ))
       )
       :duration (duration
-        :absolute 1336536131
-        :relative 2.267733413202593
+        :absolute 1305451195
+        :relative 2.345441702344937
       )
-      :calibrates (7380921 7049443)
+      :calibrates (5862379 5923146)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertTrue!()V"
       :response (response
@@ -22207,10 +22207,10 @@
           ))
       )
       :duration (duration
-        :absolute 1374609548
-        :relative 2.3078184470992915
+        :absolute 1264991903
+        :relative 2.3049824202277738
       )
-      :calibrates (7466454 6066447)
+      :calibrates (6630327 5904990)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.assertTrue:()V"
       :response (response
@@ -22239,10 +22239,10 @@
           ))
       )
       :duration (duration
-        :absolute 1324295792
-        :relative 2.278117319307242
+        :absolute 1265331452
+        :relative 2.3156702957101176
       )
-      :calibrates (7538973 6421421)
+      :calibrates (6051648 6182226)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeAssert!(-1)V"
       :response (response
@@ -22375,10 +22375,10 @@
           ))
       )
       :duration (duration
-        :absolute 1305199768
-        :relative 2.3132675730198775
+        :absolute 1296317618
+        :relative 2.3428543120170966
       )
-      :calibrates (5876958 6812393)
+      :calibrates (5924636 5848363)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeAssert!(0)V"
       :response (response
@@ -22433,10 +22433,10 @@
           ))
       )
       :duration (duration
-        :absolute 1311856214
-        :relative 2.28682939834885
+        :absolute 1334219098
+        :relative 2.339107300488441
       )
-      :calibrates (7263821 6290783)
+      :calibrates (6284100 5938113)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeAssert:(I)V"
       :response (response
@@ -22739,10 +22739,10 @@
           ))
       )
       :duration (duration
-        :absolute 1284717452
-        :relative 2.3204949479421106
+        :absolute 1321805603
+        :relative 2.3200921246403987
       )
-      :calibrates (5995252 6288829)
+      :calibrates (6220969 6429466)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeDivideByN!(0)I"
       :response (response
@@ -22823,10 +22823,10 @@
           ))
       )
       :duration (duration
-        :absolute 1301995234
-        :relative 2.3215003109851806
+        :absolute 1287862028
+        :relative 2.2696248503411947
       )
-      :calibrates (6426170 5994330)
+      :calibrates (7621588 6222823)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeDivideByN!(1)I"
       :response (response
@@ -22946,10 +22946,10 @@
           ))
       )
       :duration (duration
-        :absolute 1299186802
-        :relative 2.3474978294451665
+        :absolute 1311794404
+        :relative 2.331857723421409
       )
-      :calibrates (5937151 5736421)
+      :calibrates (6389720 5829347)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeDivideByN2!(0)I"
       :response (response
@@ -23152,10 +23152,10 @@
           ))
       )
       :duration (duration
-        :absolute 1329655251
-        :relative 2.3303358307284814
+        :absolute 1302559566
+        :relative 2.347785215971187
       )
-      :calibrates (6240146 6188769)
+      :calibrates (5917915 5778220)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeDivideByN2:(I)I"
       :response (response
@@ -23517,10 +23517,10 @@
           ))
       )
       :duration (duration
-        :absolute 1345375013
-        :relative 2.354534830123922
+        :absolute 1291341628
+        :relative 2.3121162067349816
       )
-      :calibrates (5981455 5912835)
+      :calibrates (6567258 6020690)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.checkBeforeDivideByN:(I)I"
       :response (response
@@ -23737,10 +23737,10 @@
           ))
       )
       :duration (duration
-        :absolute 1302066414
-        :relative 2.2961892925033287
+        :absolute 1301978882
+        :relative 2.3003658029971987
       )
-      :calibrates (6932621 6233985)
+      :calibrates (7038092 6001624)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByN!(0)I"
       :response (response
@@ -23795,10 +23795,10 @@
           ))
       )
       :duration (duration
-        :absolute 1286290394
-        :relative 2.3207348818552083
+        :absolute 1283277910
+        :relative 2.3377249793969264
       )
-      :calibrates (5828375 6463953)
+      :calibrates (5963882 5829157)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByN!(1)I"
       :response (response
@@ -23866,10 +23866,10 @@
           ))
       )
       :duration (duration
-        :absolute 1286038083
-        :relative 2.3291456123096865
+        :absolute 1283407306
+        :relative 2.315938390774047
       )
-      :calibrates (5936370 6117825)
+      :calibrates (6613245 5787738)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByN:(I)I"
       :response (response
@@ -23957,10 +23957,10 @@
           ))
       )
       :duration (duration
-        :absolute 1304628747
-        :relative 2.348219474671123
+        :absolute 1327668944
+        :relative 2.325760960186236
       )
-      :calibrates (5860807 5842200)
+      :calibrates (6581275 5960495)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByNMinus10054203!(0)I"
       :response (response
@@ -24054,10 +24054,10 @@
           ))
       )
       :duration (duration
-        :absolute 1353564117
-        :relative 2.353470778331273
+        :absolute 1313177502
+        :relative 2.333151575212793
       )
-      :calibrates (5991275 6004769)
+      :calibrates (6233414 5962149)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByNMinus10054203!(10054203)I"
       :response (response
@@ -24179,10 +24179,10 @@
           ))
       )
       :duration (duration
-        :absolute 1345019406
-        :relative 2.347829112197682
+        :absolute 1309186205
+        :relative 2.3144387725408158
       )
-      :calibrates (6264163 5812013)
+      :calibrates (6098177 6595652)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByNMinus10054203:(I)I"
       :response (response
@@ -24304,10 +24304,10 @@
           ))
       )
       :duration (duration
-        :absolute 1286428534
-        :relative 2.3323067795567884
+        :absolute 1326708603
+        :relative 2.352790964081229
       )
-      :calibrates (6104559 5865847)
+      :calibrates (6043502 5732953)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByZero!()I"
       :response (response
@@ -24362,10 +24362,10 @@
           ))
       )
       :duration (duration
-        :absolute 1275122485
-        :relative 2.307038473085446
+        :absolute 1288070308
+        :relative 2.313387922562595
       )
-      :calibrates (6547350 6028676)
+      :calibrates (6250445 6268901)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideByZero:()I"
       :response (response
@@ -24420,10 +24420,10 @@
           ))
       )
       :duration (duration
-        :absolute 1299164698
-        :relative 2.2991676001767503
+        :absolute 1283560176
+        :relative 2.328997717423859
       )
-      :calibrates (6701637 6345842)
+      :calibrates (6016191 6018876)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideZeroByZero!(0, 0)I"
       :response (response
@@ -24478,10 +24478,10 @@
           ))
       )
       :duration (duration
-        :absolute 1325389140
-        :relative 2.337040948382407
+        :absolute 1278318815
+        :relative 2.2995102932703904
       )
-      :calibrates (5966166 6233065)
+      :calibrates (6283189 6544809)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideZeroByZero!(0, 1)I"
       :response (response
@@ -24549,10 +24549,10 @@
           ))
       )
       :duration (duration
-        :absolute 1293634110
-        :relative 2.2830068318386587
+        :absolute 1213745459
+        :relative 2.2926172492149792
       )
-      :calibrates (7342892 6141601)
+      :calibrates (5848894 6525968)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.divideZeroByZero:(II)I"
       :response (response
@@ -24640,10 +24640,10 @@
           ))
       )
       :duration (duration
-        :absolute 1257734132
-        :relative 2.2887901655819305
+        :absolute 1283793354
+        :relative 2.32128353588617
       )
-      :calibrates (6215922 6720932)
+      :calibrates (6225098 6027878)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.doNothing!()V"
       :response (response
@@ -24672,10 +24672,10 @@
           ))
       )
       :duration (duration
-        :absolute 1251418671
-        :relative 2.334010430073296
+        :absolute 1302458392
+        :relative 2.3179981932616416
       )
-      :calibrates (5882781 5716263)
+      :calibrates (6703084 5822433)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.doNothing:()V"
       :response (response
@@ -24704,10 +24704,10 @@
           ))
       )
       :duration (duration
-        :absolute 1270478050
-        :relative 2.3405246464406457
+        :absolute 1293189526
+        :relative 2.3270329767546336
       )
-      :calibrates (5841372 5759016)
+      :calibrates (6082587 6097747)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.earlyReturn!()I"
       :response (response
@@ -24749,10 +24749,10 @@
           ))
       )
       :duration (duration
-        :absolute 1312369034
-        :relative 2.343869453667877
+        :absolute 1324154560
+        :relative 2.337388498273424
       )
-      :calibrates (5996997 5893952)
+      :calibrates (6357158 5820960)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.earlyReturn:()I"
       :response (response
@@ -24794,10 +24794,10 @@
           ))
       )
       :duration (duration
-        :absolute 1317118219
-        :relative 2.3421025672139812
+        :absolute 1272311496
+        :relative 2.317047259877893
       )
-      :calibrates (6262252 5720379)
+      :calibrates (6223595 6038825)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justAdd!(1, 2)I"
       :response (response
@@ -24865,10 +24865,10 @@
           ))
       )
       :duration (duration
-        :absolute 1297234557
-        :relative 2.324941498161228
+        :absolute 1313692329
+        :relative 2.2703753026891453
       )
-      :calibrates (6272608 6004809)
+      :calibrates (5908436 8189267)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justAdd:(II)I"
       :response (response
@@ -24936,10 +24936,10 @@
           ))
       )
       :duration (duration
-        :absolute 1300857565
-        :relative 2.338683628741361
+        :absolute 1286378335
+        :relative 2.320260098457978
       )
-      :calibrates (5960605 5967628)
+      :calibrates (6060456 6246159)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justMulitply!(1, 2)I"
       :response (response
@@ -25007,10 +25007,10 @@
           ))
       )
       :duration (duration
-        :absolute 1298710429
-        :relative 2.3350036556617764
+        :absolute 1314789512
+        :relative 2.350468494700084
       )
-      :calibrates (5910972 6098908)
+      :calibrates (5908737 5824497)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justMulitply:(II)I"
       :response (response
@@ -25078,10 +25078,10 @@
           ))
       )
       :duration (duration
-        :absolute 1368244877
-        :relative 2.340587508757156
+        :absolute 1310645385
+        :relative 2.3416115638268518
       )
-      :calibrates (5859633 6631629)
+      :calibrates (6015770 5921462)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justReturn!()I"
       :response (response
@@ -25123,10 +25123,10 @@
           ))
       )
       :duration (duration
-        :absolute 1306769266
-        :relative 2.264075558032103
+        :absolute 1300261743
+        :relative 2.3348621615551193
       )
-      :calibrates (6430819 7797492)
+      :calibrates (6118796 5909348)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justReturn:()I"
       :response (response
@@ -25168,10 +25168,10 @@
           ))
       )
       :duration (duration
-        :absolute 1300160908
-        :relative 2.2843441700682066
+        :absolute 1308112264
+        :relative 2.3536737222977884
       )
-      :calibrates (7756995 5753863)
+      :calibrates (5823956 5763852)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justReturnNothing!()V"
       :response (response
@@ -25200,18 +25200,42 @@
           ))
       )
       :duration (duration
-        :absolute 1316541477
-        :relative 2.3414950656938642
+        :absolute 1296905026
+        :relative 2.3103523680512503
       )
-      :calibrates (5889992 6104158)
+      :calibrates (6179532 6514097)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.justReturnNothing:()V"
-      :response -
-      :duration (duration
-        :absolute 0
-        :relative 0
+      :response (response
+        :init (init
+          :state (
+            :"jpamb.cases.Simple.justReturnNothing:()V:0" (state
+              :locals ()
+              :stack ()
+            )
+          )
+        )
+        :steps ((step
+            :pc "jpamb.cases.Simple.justReturnNothing:()V:0"
+            :edit (update
+              :path ()
+              :a (
+                :"jpamb.cases.Simple.justReturnNothing:()V:0" (state
+                  :locals ()
+                  :stack ()
+                )
+              )
+              :b ok
+            )
+          ) (step
+            :pc "jpamb.cases.Simple.justReturnNothing:()V:0"
+          ))
       )
-      :calibrates ()
+      :duration (duration
+        :absolute 1288073409
+        :relative 2.3424360054874005
+      )
+      :calibrates (5868110 5841289)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.multiError!(false)I"
       :response (response
@@ -25292,10 +25316,10 @@
           ))
       )
       :duration (duration
-        :absolute 1412689223
-        :relative 2.3364336896735702
+        :absolute 1373428919
+        :relative 2.356513529228627
       )
-      :calibrates (7073438 5947520)
+      :calibrates (5836019 6251096)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.multiError!(true)I"
       :response (response
@@ -25402,10 +25426,10 @@
           ))
       )
       :duration (duration
-        :absolute 1292674519
-        :relative 2.3280881596690106
+        :absolute 1335980972
+        :relative 2.3363923608694215
       )
-      :calibrates (6204808 5941129)
+      :calibrates (6219778 6095321)
     ) (interpret-result
       :experiment "jpamb.cases.Simple.multiError:(Z)I"
       :response (response
@@ -25565,10 +25589,10 @@
           ))
       )
       :duration (duration
-        :absolute 1281321396
-        :relative 2.3465121849996837
+        :absolute 1328179908
+        :relative 2.3122727884435523
       )
-      :calibrates (5793628 5745577)
+      :calibrates (6130287 6812092)
     ) (interpret-result
       :experiment "jpamb.cases.Strings.sayHello!(s'hello')V"
       :response (response
@@ -25728,10 +25752,10 @@
           ))
       )
       :duration (duration
-        :absolute 1442705027
-        :relative 2.334954347639098
+        :absolute 1308192805
+        :relative 2.356382635231628
       )
-      :calibrates (7034425 6308566)
+      :calibrates (5760886 5755577)
     ) (interpret-result
       :experiment "jpamb.cases.Strings.sayHello!(s'not hello')V"
       :response (response
@@ -25891,10 +25915,10 @@
           ))
       )
       :duration (duration
-        :absolute 1309019219
-        :relative 2.292742713073362
+        :absolute 1301094350
+        :relative 2.2613898450222134
       )
-      :calibrates (7055554 6286826)
+      :calibrates (8090339 6164061)
     ) (interpret-result
       :experiment "jpamb.cases.Strings.sayHello:(Ljava/lang/String;)V"
       :response (response
@@ -26054,10 +26078,10 @@
           ))
       )
       :duration (duration
-        :absolute 1304322634
-        :relative 2.3283348145588403
+        :absolute 1301568139
+        :relative 2.343273889269851
       )
-      :calibrates (5933425 6314999)
+      :calibrates (5916342 5892927)
     ) (interpret-result
       :experiment "jpamb.cases.Tricky.collatz!(0)V"
       :response (response
@@ -26370,10 +26394,10 @@
           ))
       )
       :duration (duration
-        :absolute 1295169056
-        :relative 2.33318025936119
+        :absolute 1301723664
+        :relative 2.3277898737043277
       )
-      :calibrates (6240868 5786655)
+      :calibrates (6362709 5876657)
     ) (interpret-result
       :experiment "jpamb.cases.Tricky.collatz!(24)V"
       :response (response
@@ -26641,10 +26665,10 @@
           ))
       )
       :duration (duration
-        :absolute 1303670196
-        :relative 2.286415192235396
+        :absolute 1313774931
+        :relative 2.306188353076949
       )
-      :calibrates (7537529 5945347)
+      :calibrates (7095922 5886706)
     ) (interpret-result
       :experiment "jpamb.cases.Tricky.collatz:(I)V"
       :response (response
@@ -27033,9 +27057,9 @@
           ))
       )
       :duration (duration
-        :absolute 1329232994
-        :relative 2.2225144710052316
+        :absolute 1323149728
+        :relative 2.3088094352754394
       )
-      :calibrates (8025977 7900387)
+      :calibrates (6718625 6277969)
     ))
 )

@@ -223,16 +223,12 @@ class SignSet(Abstraction, Lattice):
                 output = set()
                 if 1 in self.signs:
                     output.add(1)
-                    if 0 in other.signs:
-                        output.update([-1])
                     if 1 in other.signs:
-                        output.update([0,-1])
+                        output.update([0, -1])
                 if -1 in self.signs:
                     output.add(-1)
                     if -1 in other.signs:
                         output.update([0, 1])
-                    if 0 in other.signs:
-                        output.update([1])
                 if 0 in self.signs:
                     if 0 in other.signs:
                         output.add(0)
